@@ -19,6 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
+import { auth } from 'firebase';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { LoginComponent } from './login/login.component';
       {path:'admin/orders',component: AdminOrdersComponent }
     ])
   ],
-  providers: [],
+  providers: [
+    AuthService 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
