@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,16 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //3.after coming back from google we need to read local storage extract the returnUrl and navigate user accordingly
-  constructor(private auth: AuthService, route : Router){
+  
+  constructor(private userService: UserService, private auth: AuthService, route : Router){
     auth.user$.subscribe(user =>
       {
         if(user) {
+          //1. here when the user logs in we need to store them in the db
+          /* note: Anytime we want to work with firebase we should encapsulate our code inside a service to 
+          have better separation of concerns and testability */
+          userService.save(user);
+
           let returnUrl = localStorage.getItem('returnUrl');
           route.navigateByUrl(returnUrl);
         }        
