@@ -5,11 +5,13 @@ import { AngularFireDatabase } from 'angularfire2/database';
   providedIn: 'root'
 })
 export class ProductService {
-
+ 
   constructor(private db: AngularFireDatabase) { }
 
   create(product) {
     return this.db.list('/products').push(product);
   }
-
+  getAll(){
+   return this.db.list('/products');   
+  }
 }
