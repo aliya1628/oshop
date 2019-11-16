@@ -10,6 +10,6 @@ export class AdminProductsComponent {
   products$;
 
   constructor(private productService : ProductService) {
-   this.products$ = this.productService.getAll().valueChanges();
+   this.products$ = this.productService.getAll();
    }
 }
